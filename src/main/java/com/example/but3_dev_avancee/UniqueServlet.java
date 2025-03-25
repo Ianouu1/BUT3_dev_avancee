@@ -1,6 +1,7 @@
 package com.example.but3_dev_avancee;
 
-import jakarta.servlet.annotation.WebServlet;
+import com.example.but3_dev_avancee.action.Action;
+import com.example.but3_dev_avancee.action.ActionFactory;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

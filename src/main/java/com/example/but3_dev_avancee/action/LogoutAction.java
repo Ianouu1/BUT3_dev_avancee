@@ -1,4 +1,4 @@
-package com.example.but3_dev_avancee;
+package com.example.but3_dev_avancee.action;
 
 import com.example.but3_dev_avancee.model.UserBean;
 import jakarta.servlet.http.HttpServletRequest;
