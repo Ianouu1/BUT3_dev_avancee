@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
 <h1>Login</h1>
-<form action="login-action" method="post">
+<form action="login-action.do" method="post">
     <label for="username">Username : </label>
     <input type="text" id="username" name="username" required>
     <br/>

@@ -1,4 +1,4 @@
-<%@ page import="com.example.but3_dev_avancee.User" %>
+<%@ page import="com.example.but3_dev_avancee.model.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +6,7 @@
     <title>Page1</title>
 </head>
 <body>
-<a href="logout-action">Logout</a>
+<a href="logout-action.do">Logout</a> <br/>
 <%
     User user = (User) session.getAttribute("user");
     if (user != null) {
@@ -18,7 +18,7 @@
     }
 %>
 
-<form action="actionUn" method="post">
+<form action="actionUn.do" method="post">
     <label for="attribute2">Attribut 2 : </label>
     <input type="text" id="attribute2" name="attribute2" required>
     <br/>
