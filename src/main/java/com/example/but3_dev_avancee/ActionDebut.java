@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class ActionDebut implements Action {
     @Override
-    public void perform(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect("Login.jsp");
+    public String perform(HttpServletRequest request, HttpServletResponse response) {
+        return "Login.jsp";
     }
 }

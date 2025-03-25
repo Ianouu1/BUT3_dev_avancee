@@ -21,10 +21,13 @@ public class UniqueServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String actionName = request.getServletPath().substring(1);
         Action action = ActionFactory.getAction(actionName);
+
+        String redirect = null;
         if (action != null) {
-            action.perform(request, response);
+            redirect = action.perform(request, response);
         } else {
-            response.sendRedirect("error.jsp");
+            redirect = "error.jsp";
         }
+        response.sendRedirect(redirect);
     }
 }

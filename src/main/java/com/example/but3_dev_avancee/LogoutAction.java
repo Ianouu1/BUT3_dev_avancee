@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class LogoutAction implements Action {
     @Override
-    public void perform(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String perform(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
         String username = null;
         if (session != null) {
@@ -18,6 +18,6 @@ public class LogoutAction implements Action {
             }
             session.invalidate();
         }
-        response.sendRedirect("goodbye.jsp?username=" + (username != null ? username : ""));
+        return "goodbye.jsp?username=" + (username != null ? username : "");
     }
 }

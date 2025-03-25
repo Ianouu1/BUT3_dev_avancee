@@ -7,5 +7,5 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface Action {
-    void perform(HttpServletRequest request, HttpServletResponse response) throws IOException;
+    String perform(HttpServletRequest request, HttpServletResponse response) throws IOException;
 }
