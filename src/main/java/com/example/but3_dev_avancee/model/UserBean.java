@@ -3,7 +3,7 @@ package com.example.but3_dev_avancee.model;
 import lombok.Getter;
 import lombok.Setter;
 
-public class User {
+public class UserBean {
     @Getter
     private String username;
     private String password;
@@ -14,7 +14,7 @@ public class User {
     @Getter
     private String attribute3;
 
-    public User(String username, String password) {
+    public UserBean(String username, String password) {
         this.username = username;
         this.password = password;
     }

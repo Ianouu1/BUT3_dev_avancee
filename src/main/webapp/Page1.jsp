@@ -1,4 +1,5 @@
-<%@ page import="com.example.but3_dev_avancee.model.User" %>
+<%@ page import="com.example.but3_dev_avancee.model.UserBean" %>
+<%@ page import="com.example.but3_dev_avancee.model.UserBean" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +9,12 @@
 <body>
 <a href="logout-action.do">Logout</a> <br/>
 <%
-    User user = (User) session.getAttribute("user");
-    if (user != null) {
+    UserBean userBean = (UserBean) session.getAttribute("userBean");
+    if (userBean != null) {
 %>
-<p>Welcome <%= user.getUsername() %></p>
-<p>Attribut 2 : <%= user.getAttribute2() %></p>
-<p>Attribut 3 : <%= user.getAttribute3() %></p>
+<p>Welcome <%= userBean.getUsername() %></p>
+<p>Attribut 2 : <%= userBean.getAttribute2() %></p>
+<p>Attribut 3 : <%= userBean.getAttribute3() %></p>
 <%
     }
 %>

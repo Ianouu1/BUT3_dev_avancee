@@ -1,6 +1,6 @@
 package com.example.but3_dev_avancee;
 
-import com.example.but3_dev_avancee.model.User;
+import com.example.but3_dev_avancee.model.UserBean;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -12,9 +12,9 @@ public class LogoutAction implements Action {
         HttpSession session = request.getSession(false);
         String username = null;
         if (session != null) {
-            User user = (User) session.getAttribute("user");
-            if (user != null) {
-                username = user.getUsername();
+            UserBean userBean = (UserBean) session.getAttribute("user");
+            if (userBean != null) {
+                username = userBean.getUsername();
             }
             session.invalidate();
         }

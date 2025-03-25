@@ -1,10 +1,9 @@
 package com.example.but3_dev_avancee;
 
-import com.example.but3_dev_avancee.model.User;
+import com.example.but3_dev_avancee.model.UserBean;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
 
 public class LoginAction implements Action {
     @Override
@@ -12,9 +11,9 @@ public class LoginAction implements Action {
         HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        User user = new User(username, password);
-        if (user.isValid()) {
-            session.setAttribute("user", user);
+        UserBean userBean = new UserBean(username, password);
+        if (userBean.isValid()) {
+            session.setAttribute("user", userBean);
             return "Page1.jsp";
         } else {
             return "error.jsp";
