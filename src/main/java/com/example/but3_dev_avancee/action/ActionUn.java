@@ -11,6 +11,9 @@ public class ActionUn implements Action {
         HttpSession session = request.getSession();
         UserBean userBean = (UserBean) session.getAttribute("user");
         if (userBean != null) {
+            if (request.getParameter("attribute2").isEmpty() || request.getParameter("attribute3").isEmpty()) {
+                return "errorAttribute.jsp";
+            }
             userBean.setAttribute2(request.getParameter("attribute2"));
             userBean.setAttribute3(request.getParameter("attribute3"));
             return "Page1.jsp";

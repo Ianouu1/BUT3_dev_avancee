@@ -21,10 +21,10 @@
 
 <form action="actionUn.do" method="post">
     <label for="attribute2">Attribut 2 : </label>
-    <input type="text" id="attribute2" name="attribute2" required>
+    <input type="text" id="attribute2" name="attribute2">
     <br/>
     <label for="attribute3">Attribut 3 : </label>
-    <input type="text" id="attribute3" name="attribute3" required>
+    <input type="text" id="attribute3" name="attribute3">
     <br/>
     <input type="submit" value="ok">
 </form>
