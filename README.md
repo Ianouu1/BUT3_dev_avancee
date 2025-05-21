@@ -62,7 +62,7 @@ Action cacahuete, a l'iterieur on a un controlleur ControllerDeLogin : URL mappi
 
 4) Quelle est la différence entre la configuration par annotations et la configuration xml ?
 
-l'anotation gener eun fichier xxml : simplification de la configuration basique des serveurs
+l'anotation genere un fichier xml : simplification de la configuration basique des serveurs
 
 Par contre la cnfiguration par xml, on peut faire bcp plus de choses
 
@@ -250,3 +250,7 @@ Peut-être chopper une meilleure correction.
 
 ## Coding : 
 1 - Quand on appuie sur le bouton OK et que les champs sont vides : redirige sur une page "ils sont vides, veuillez ressaisir les champs"
+
+2 - A l'arrivée d'une requête cliente, il y a :
+- Instanciation d'une classe form correspondant à cette requête qui va récupérer les données du formulaire et les valider
+- Instanciation d'une classe action correspondant à cette requête qui va faire le traitement et renvoyer une url de suite

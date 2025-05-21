@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <action-key>login-action.do</action-key>
+        <action-value>com.example.but3_dev_avancee.action.LoginAction</action-value>
+    </action>
+    <action>
+        <action-key>logout-action.do</action-key>
+        <action-value>com.example.but3_dev_avancee.action.LogoutAction</action-value>
+    </action>
+    <action>
+        <action-key>actionUn.do</action-key>
+        <action-value>com.example.but3_dev_avancee.action.ActionUn</action-value>
+    </action>
+    <action>
+        <action-key>action-debut.do</action-key>
+        <action-value>com.example.but3_dev_avancee.action.ActionDebut</action-value>
+    </action>
+</actions>
