@@ -4,253 +4,251 @@
 
 Les différentes versions du projet peuvent être retrouvées à travers les branches suivantes :
 
+- **20-05-rendu1** (V5)
 - **web_xml** (V4)
 - **MVC_2_WITH_INTERFACE** (V3)
 - **MVC2** (V2)
 - **master** (V1)
 
-(lien de mon google docs perso du cours du 25/03 : https://docs.google.com/document/d/1q-WCj3XiBPIFcV2f7FvaTGEg_ZFOX2a-Pkrg3MJVks0/edit?tab=t.0)
-# Questions qui pourraient être posées pendant l'oral de dernière séance :
-1) Qu'est-ce qu'un framework ?
+---
 
-Ca permet d'écrire du code à notre place
-2) Quelle est la différence entre un modèle MVC et MVC2 ?
+# Questions qui seront posées pendant l'oral de dernière séance :
 
-Un modele MVC (On dit MVC pas MVC1), il y a autant de servlet que de boutons
-Un modèle MVC2, il y a une servlet qui gère tout
+## 1️⃣ Qu'est-ce qu'un framework ?
 
-Pour un framework, il faut un unique servlet qui gère tout
+Un framework est un ensemble de bibliothèques et d'outils qui facilite le développement d'applications en fournissant
+une structure de base et des fonctionnalités réutilisables.
 
-Si on veut qu'il écrive le code pour nous il nous faut un unique servlet 
+### 📄 TLDR
 
-Le code est plus rapide en MVC car straight to the point
+> Un framework permet d'écrire du code à notre place. (En réutilisant des classes et des méthodes déjà écrites)
 
-Le modèle MVC est vieux, MVC2 plus récent.
-MVC 2 ++> modele a 5 couche VS modèle & 3 couches pour MVC
+## 2️⃣ Quelle est la différence entre un modèle MVC et MVC2 ?
 
-MVC2 :
-- Vue (page)
-- Controleur (qui fait larrivée de la vue)
-- Service (uniquemetn le processus métier, les "verbes", les "actions" : ajouter un client, supprimer un client...)
-- Modèle (Entité, classes de java)
-- Persistance (qui fait le lien entre les modèles et la base de donnée)
+1. Dans un modèle MVC (⚠️MVC1 = pléonasme), on utilise autant de servlet que de boutons.
+2. Dans un modèle MVC2, il y a une servlet qui gère tous les boutons.
 
-Prenons l'exemple d'un service de login :
-Dans un service de login j'ai la vue(osef)
-Dans le modèle j'ai la classe login avec String nom, String password, getters, setters
-Dans la couche de persistance (avant DAO, maintenant on l'appelle repository) : on a un login home/loginDAO : attribut un login, méthode inserlogin, findloginbyID ==> toute les méthodes uqi fvotn fair ele lien entre les modele et la base de données
-La couche service a comem méthode (classe service login) : méthode ajouter un login, isvalid, changepassword, findall..
-La classe controller a une méthode par click de la vue
+⚠️ Pour un framework, il faut utiliser un modèle MVC2. (pour éviter d'avoir à ajuster le nombre de servlet à chaque
+ajout de bouton)
 
-==> En gros
-la classe vue à le droit d'appeler que le controlleur
-Le controlleur a comme attribut le service
-Le service a comme attribut le repository
+### Informations complémentaires
 
-<!> SERA REPOSÉE DANS 15 JOURS
+- Un modèle MVC sera plus rapide qu'un modèle MVC car il ira droit au but
+- Le modèle MVC est vieux, MVC2 plus récent.
 
-3) Qu'est-ce qu'un URL mapping ?
+|          | MVC                                                              | MVC2                                                                                                         |
+|----------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| Couches  | 3                                                                | 5                                                                                                            |
+| Couche 1 | Vue + Contrôleur : La vue sait vers service rediriger la requête | Vue (Page Web) : HTML, JSP                                                                                   |
+| Couche 2 | Modèle (cf. MVC2)                                                | Contrôleur (Reçoit les requêtes, redirige vers le bon service) : Servlet                                     |
+| Couche 3 | Persistance (cf. MVC2)                                           | Service (Uniquement le processus métier, les "verbes"/"actions") : Ajouter un client, Supprimer un client... |
+| Couche 4 | ---                                                              | Modèle (Représentation des données, classes Java qui représentent les données) : LoginAction, ActionUn...    |
+| Couche 5 | ---                                                              | Persistance (Lien entre les modèles (classes) et la base de données)                                         |
 
-Mot important : REDIRIGER
+### Exemple avec un service de login en MVC2
 
-MAPPING : mettr een relation
+1. Vue : formulaire avec username/password
+2. Contrôleur : Servlet (unique) qui reçoit la requête, instancie LE service de login parmi les autres services
+3. Service : Contient la logique métier :
+    - ajouterLogin()
+    - isValid()
+    - changePassword()
+    - findAll()
+4. Modèle : classe Login
+    - Attributs : String nom, String password
+    - Getters, Setters
+5. Persistance (anciennement DAO, maintenant appelée repository) qui permet de gérer l'accès aux données :
+    - insertLogin(Login login)
+    - findIdByNom (String nom)
+    - ... (toutes les méthodes qui vont faire le lien entre les modèles et la BD)
 
-Mettre en relation l'URL et les controlleurs
+## 3️⃣ Qu'est-ce qu'un URL mapping ?
 
-Dans la forme
-Action cacahuete, a l'iterieur on a un controlleur ControllerDeLogin : URL mapping ais le lien entre le monde extérieur/intérieur
+Permet de mettre en relation des URL avec les contrôleurs / faire des **redirections**. L'URL mapping fais le lien entre
+le monde extérieur/intérieur
 
-4) Quelle est la différence entre la configuration par annotations et la configuration xml ?
+(MAPPING = mettre en relation)
 
-l'anotation genere un fichier xml : simplification de la configuration basique des serveurs
+## 4️⃣ Quelle est la différence entre la configuration par annotations et la configuration xml ?
 
-Par contre la cnfiguration par xml, on peut faire bcp plus de choses
+- Annotation = disperse les routes dans différents fichiers
+- XML = centralise les routes dans un seul fichier
 
-99% on utilise les 2 :
-On fait un bon par annotation et le ssubitilités on le fait dans le fichier XML
+### Quand est-ce que sont résolus les XML et les annotations ?
 
-#### Quand est-ce que sont résolus les XML et les annotations ?
-Dans l'initialisation du serveur
+À l'initialisation du serveur
 
-5) Qu'est-ce que déployer une application ? 
+## 5️⃣ Qu'est-ce que déployer une application ?
 
-Mise en production, le rendre accessible par les autres.
+Mise en production, rendre l'application accessible pour d'autres personnes
 
-6) Comment déployer une application sur tomcat ?
+## 6️⃣ Comment déployer une application sur tomcat ?
 
-1 - Install tomcat
-2 - ouvre les ports du serveur
-3 - faire un .war (web archive) qui contient déjà plus de trucs (des images, page web, fichier de config)
-4 - le mettre dans le fichier application de tomcat
+1. (Install tomcat)
+2. (Ouvre les ports du serveur)
+3. faire un .war (web archive) qui contient déjà plus de trucs (des images, page web, fichier de config)
+4. le mettre dans le fichier application de tomcat
 
-(btw on peut .jar <=> .zip)
+### Random knowledge
 
-7) Où est-ce que le programmeur définis le mapping ?
+- On utilise .jar pour les applications qui ne nécessite pas de serveur (Tomcat)
+- On utilise .war pour les applications qui nécessitent un serveur (Tomcat)
+- On peut .jar <=> .zip
 
-Dans un fichier XML (web.xml dans le cas présent)
-#### Qu'est-ce qu'un fichier XML
-Fichier texte qui permet de structurer les données
+## 7️⃣ Où est-ce que le programmeur définit le mapping ?
 
-On favorise les bases de données XML, car elles sont plus rapide que les base de données "en table" : SQL
+Dans un fichier XML (services.xml dans le cas présent)
 
-Un fichier XML est un modèle DICK.
+### Additional knowledge
 
-8) Comment le programme utilise le fichier xml ? qu'est-ce qu'il en fait ?
+- XML : Fichier texte qui permet de structurer les données
+- On favorise les bases de données XML, car elles sont plus rapide que les base de données "en table" : SQL
+- (Un fichier XML est un modèle DICK)
 
-Le programme lis le fichier xml et va remplir une hashmap dans laquelle la clé est l'url pattern et l'action est le nom de la chose à faire.
+## 8️⃣ Comment le programme utilise le fichier xml ? qu'est-ce qu'il en fait ?
 
-Dans la hashmap y'a la clé et la valeur : 
-- la clé : c'est l'url pattern, ce qu'il ya dans la page HTML
-- Value : une classe d'action, qui est un mot clé qui identifie l'action à faire 
+Le programme **lis le fichier XML** et **remplis une hashmap** :
 
-La Hashmap permet de faire le lien entre la page HTML et le serveur
+- Clé = l'URL-pattern, ce qu'il y a dans la page HTML
+- Valeur = Une classe Action qui identifie l'action à réaliser
 
-On cherche ce qui arrive depuis la page HTML et on a un mot clé qui nous permet de fire ce qu'il faut faire quand on arrive depuis cet url pattern.
+Cette Hashmap permet de **faire le lien entre la page HTML et le serveur**
 
-Les classes d'acitons concerne les trucs à faire selon l'url pattern
+## 9️⃣ Quel est le design-pattern au cœur du modèle MVC ?
 
-9) Quel est le design pattern au coeur du modèle MVC ?
+- C'est une Factory (usine à classe) : Rentre un String ==> me donne une classe
+- Factory = Design-pattern qui associe instance de la classe à un string
 
-C'est une Factory (usine à classe) : Rentre un String ==> Me donne une classe
+### Retenir
 
-Factory = DDesign Pattern qui associe instance de la classe à un string
+MVC2 = C'est une Factory car un String du monde extérieur associe une classe du monde intérieur
 
-MVC2 :
-C'est une Factory car un String du monde extérieur associe une classe du monde intérieur
+## 1️⃣0️⃣ Quelles sont les particularités des actions du modèle MVC2
 
-10) Quelles sont les particularités des actions du modèle MVC2
+- Autant d'actions dans le modèle MVC2 qu'il y avait dans le modèle MVC2 (et autant de servlets accessoirement)
+- Une action = un truc à faire sur un click
+- Les actions seront appelés selon une Hashmap, qui va faire le lien entre la page HTML et l'action à réaliser.
+- Les actions implémentent la même interface
+- Toutes les actions implémentent une interface `Action` avec une méthode `perform(request, response)` → retourne un
+  string (URL de suite en .jsp)
 
-Il y a autant d'actions dans le modèle MVC2, qu'il y avait avant de servlet dans le modèle MVC.
+## 1️⃣1️⃣ Quelle est le rôle de la servlet en MVC2
 
-Une action = un truc à faire sur un click
+1. Le controller récupère l'URL d'appel
+2. Grâce à l'URL d'appel, la hashmap trouve l'action à instancier
+3. La servlet instancie l'action grâce à la Factory
+4. Elle appelle la méthode `perform(request, response)` de l'action, qui retourne un String (l'URL de suite)
 
-Les actions seront appelés selon la Hashmap, qui va faire le lien entre la page HTML et l'action à réaliser.
+## 1️⃣2️⃣ Quels sont les 2 design-patterns utilisés dans un framework MVC2
 
-Les actions ont la particularité d'implémenter toutes la même interface
+1. Factory
+2. Singleton (paterne qui permet d'instancier une casse qu'une seule fois)
 
-Les actions ont toutes au moins une méthode qui a la même tête que la méthode d'une servlet CAD elle prends en argument une requete, une response pour ce qui va partir et retourne une string (étant l'url de suite)
+## 1️⃣3️⃣ Qu'est-ce qu'un design-pattern ?
 
-En gros l'action ajoute, insère un nouveau login => Elle a une méthode qui prends en arg la requ/lesposne qui va retourne une string "ok login" qui est une url de suite.
+Méthode pour résoudre un problème d'architecture récurrent.
 
-Le return de la méthode d'action est généralement une .jsp qui continue le programme.
+### Exemple
 
-11) Quest-ce que contient la String retournée par une action
+#### Modes de livraisons d'Amazon
 
-La .jsp par laquelle il faut continuer (qui contient l'url de suite : déjà partiellement répondue dans la question précédente)
+- Aujourd'hui : Camion
+- Demain : Drones (? Peut être)
+- Dans 10 ans : de nouveaux modes de livraisons
 
-12) Quelle est l'algo de la servlet du MVC2
+#### On observe
 
-Le controlleur récupère l'url d'appel
+- Il faut un mode de livraison (obligatoire)
+- Un seul peut être utilisé à la fois
+- Des nouveaux modes de livraison peuvent être ajoutés
 
-A partir de l'url dappel par la hashmap va déterminé l'action qui correspond à l'url
+Ainsi, on peut créer un design-pattern qui permet de gérer les modes de livraison d'Amazon, et d'en rajouter de nouveaux
+sans modifier le code existant
 
-Elle instancie l'action
+## 1️⃣4️⃣ Qu'est-ce qu'une Servlet ?
 
-Elle appelle la méthode de l'action qui correspond aux choses à faire
-
-La méthode retourne une String, elle forwarde la requete vers la jsp qui correspond à l'url de suite
-
-13) Quels sont les 2 design patterns utilisés dans un framework MVC2
-
-1 - Factory
-2 - Singleton (paterne qui permet d'instancier une casse qu'une seule fois)
-
-## Histoires pour tester la compréhension :
-
-### Les élèves mangent des repas.
-
-On a un modèle : qui a la classe élève, repas (Un nom = une classe)
-Dans service : service gestion de repas : mange (un verbe = une méthode)
-
-PK y'a pas de DAO ? ==> car on sauvegarde pas dans la BD
-
-Si j'aurais rajouté "je veux que mes élèves soient sauvegardées dans une BD"
-Dans repository ==> package repository avec une methode InsertEleve,deleteEleve..
-
-### Le magasin vends des articles, les articles sont des ordinateurs, chaises, tables. Je veux que le tout soit organisés dans une BD
-
-"les articles" ==> Interface article (quand on veut dire "les" on veut les regrouper, et donc c'est une interface)
-
-(noms = Modèle) (Si je veux les regrouper : Interface)
-Modèle : class Magasin, INTERFACE Article, class Ordinateur, class Chaise, class Table
-
-(Quand je veux les enregistrer)
-Repository : MagasinDAO, ArticleDAO, OrdinateurDAO, ChaiseDAO, TableDAO
-==> Insert/Delete/FindByID
-
-(Verbes = Service)
-Service : vends(Magasin, Article)
-
-## Qu'est-ce qu'un Design Pattern ?
-
-Façon d'organiser des classes 
-> Comment organiser les classes pour résoudre un problème récurrent
-
-Une méthode pour résoudre un problème d'architecture récurrent
-
-Exemple de pattern :
-Amazon à un mode de livraison : il va surement en avoir d'autre dans le futur 
-> - Drones
-> - Camion (actuel)
-> - ...
-
-Il y en a un seul, il est obligatoire et il y en aura d'autre à l'avenir
-
-Pattern de Stratégie : résout le problème de y'en a un il est obligatoire et y'en aura d'autres plus tard.
-
-### Définition Servlet :
-Une servlet est un composant Java côté serveur qui permet de traiter des requêtes HTTP et de générer des réponses dynamiques, généralement dans une application web.
+Une servlet est un composant Java côté serveur qui permet de traiter des requêtes HTTP et de générer des réponses
+dynamiques, généralement dans une application web.
 
 Définition simple :
-Une servlet est une classe Java qui s’exécute dans un serveur d’applications (comme Tomcat) et qui répond aux requêtes HTTP, souvent via une URL.
-
-
+Une servlet est une classe Java qui s’exécute dans un serveur d’applications (comme Tomcat) et qui répond aux requêtes
+HTTP, souvent via une URL.
 
 ---
-# Ce qui a été fait dans la séance du 20/05 
 
-## Trouver package, classes, interfaces et méthodes
+## Histoires pour tester la compréhension
+
+### Méthodologie
+
+1. Identifier les noms (modèle)
+2. Identifier les verbes (service)
+3. Identifier les interfaces (quand on veut regrouper des noms)
+
+---
+
+### Les élèves mangent des repas
+
+- Dans Modèle : on a les classes `élève`, `repas` (Un nom = une classe)
+- Dans Service : on a le service `mange` (un verbe = une méthode)
+
+**PK y'a pas de DAO ?** ==> car on sauvegarde pas dans la BD
+
+#### NB
+
+Si j'avais rajouté "je veux que mes élèves soient sauvegardées dans une BD"
+Dans repository ==> package repository avec une methode InsertEleve, deleteEleve..
+
+---
+
+### Le magasin vend des articles, les articles sont des ordinateurs, chaises, tables. Je veux que le tout soit organisés dans une BD
+
+- Dans Modèle (noms = classe) :
+    - Interface `Article` ("les articles", quand on veut dire "les" on veut les regrouper == Interface)
+    - Classe `Magasin`
+    - Classe `Ordinateur`
+    - Classe `Chaise`
+    - Classe `Table`
+- Dans service (verbes = méthode) :
+    - `Vends(Magasin, Article)`
+- Dans Repository (quand je dois enregistrer/manipuler des données dans une BD) :
+    - `MagasinDAO` (pour manipuler les magasins)
+    - `ArticleDAO` (pour manipuler les articles)
+    - `OrdinateurDAO` (pour manipuler les ordinateurs)
+    - `ChaiseDAO` (pour manipuler les chaises)
+    - `TableDAO` (pour manipuler les tables)
+        - ==> Insert/Delete/FindByID
+
+---
+
+### Un site de gestion d'université
+
 - Site de gestion d'université
-- Une université à des étudiants 
+- Une université à des étudiants
 - Chaque étudiant à un seul et un seul cursus. Il existe 3 cursus possible CursusSciences, CursusLettres, CursusDroit
-- L'étudiant peut se loguer pour consulter son cursus, consulter ses informations personnelles 
+- L'étudiant peut se loguer pour consulter son cursus, consulter ses informations personnelles
 - Le tout est sauvegardé dans une bdd
 
-- > Modèle :
-  > - classe Universite
-  > - classe Etudiant
-  > - classe CursusSciences
-  > - classe CursusLettres
-  > - classe CursusDroit
-  > - interface Cursus
-  > - classe Login (Pour des raisons de sécurité, login != etudiant)
-
-
-- > - Repository :
-  > - UniversiteRepository
-  > - EtudiantRepository
-  > - CursusDAO
-  > - CursusSciencesRepository
-  > - CursusLettresRepository
-  > - CursusDroitRepository
-
-
-- > - Service :
-  > - GestionEtudiant
-  > - GestionCursus
-  > - GestionLogin
-
-- > - Controlleur :
-  > Une interface par action
-  > - ConsultCursus
-  > - ConsulterInfoPerso
-  > - Login
-
-Peut-être chopper une meilleure correction.
-
-## Coding : 
-1 - Quand on appuie sur le bouton OK et que les champs sont vides : redirige sur une page "ils sont vides, veuillez ressaisir les champs"
-
-2 - A l'arrivée d'une requête cliente, il y a :
-- Instanciation d'une classe form correspondant à cette requête qui va récupérer les données du formulaire et les valider
-- Instanciation d'une classe action correspondant à cette requête qui va faire le traitement et renvoyer une url de suite
+- Dans Modèle (noms = classe) :
+    - Interface `Cursus` ("les cursus", regroupement logique)
+    - Classe `Universite`
+    - Classe `Etudiant`
+    - Classe `CursusSciences`
+    - Classe `CursusLettres`
+    - Classe `CursusDroit`
+    - Classe `Login` (séparé d’Etudiant pour des raisons de sécurité)
+- Dans Service (verbes = méthode) :
+    - `GestionEtudiant`
+    - `GestionCursus`
+    - `GestionLogin`
+- Dans Contrôleur (une interface par action) :
+    - `ConsultCursus`
+    - `ConsulterInfoPerso`
+    - `Login`
+- Dans Repository (quand je dois enregistrer/manipuler des données dans une BD) :
+    - `UniversiteRepository` (pour manipuler les universités)
+    - `EtudiantRepository` (pour manipuler les étudiants)
+    - `CursusDAO` (interface commune pour manipuler les cursus)
+    - `CursusSciencesRepository` (pour manipuler les cursus sciences)
+    - `CursusLettresRepository` (pour manipuler les cursus lettres)
+    - `CursusDroitRepository` (pour manipuler les cursus droit)
+        - ==> Insert/Delete/FindByID

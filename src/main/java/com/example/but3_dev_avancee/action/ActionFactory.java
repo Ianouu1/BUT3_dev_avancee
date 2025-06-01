@@ -3,7 +3,6 @@ package com.example.but3_dev_avancee.action;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,10 +13,10 @@ public class ActionFactory {
     static {
         try {
             XmlMapper xmlMapper = new XmlMapper();
-            InputStream inputStream = ActionFactory.class.getClassLoader().getResourceAsStream("myFactory.xml");
+            InputStream inputStream = ActionFactory.class.getClassLoader().getResourceAsStream("actions-mapping.xml");
 
             if (inputStream == null) {
-                throw new RuntimeException("Le fichier myFactory.xml est introuvable dans le classpath");
+                throw new RuntimeException("Le fichier actions-mapping.xml est introuvable dans le classpath");
             }
 
             JsonNode root = xmlMapper.readTree(inputStream);
